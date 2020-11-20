@@ -1,0 +1,82 @@
+<div id="page-wrapper">
+<div class="container-fluid">
+<div class="bg-title">
+<div class="row">
+<div class="col-12">
+<div class="row">
+<div class="col-7">
+<h3 class="box-title"><%=__('Manage User')%></h3>
+<ol class="breadcrumb text-left">
+<li><a href="/admin/dashboard"><%=__('Dashboard')%></a></li>
+<li class="active"><%=__('Manage User')%></li>
+</ol>
+</div>                
+
+<div class="col-5">
+<%if(permission.add){%>
+<a href="/admin/user/add" class="btn btn-danger pull-right btn-rounded  waves-effect waves-light">Add</a>
+<%}%>
+
+</div>
+
+</div>
+
+</div>
+<!-- /.col-lg-12 -->
+</div>
+</div>
+<form action="" method="post" id="tbl_form">
+<div class="row">
+<div class="col-sm-12">
+<div class="white-box">                      
+
+<div class="table-responsive">
+<%include ../message/message.ejs%>
+<input type="hidden" name="cont" id="cont" value="user">
+<input type="hidden" name="fun" id="fun" value="all">
+<table id="user_tbl" class="table table-striped">
+<thead>
+<tr style="background:#f9f9f9">
+<th class="no-sort GFVF"><input type="checkbox" name="allcheck" value="1" id="all_check"></th>
+<th colspan="8">
+<div class="row pull-right">
+<label class="col-xs-3 col-form-label" style="line-height:33px; padding:0;" for="select11"> Actions </label>
+<div class="col-xs-6">
+<select name="action_change" id="action_change" tabindex="1" data-placeholder="Choose a Category" class="form-control">
+<option value="">Select option</option>
+<option value="2"><%=__('Delete')%></option>
+<option value="1"><%=__('Active')%></option>
+<option value="0"><%=__('Inactive')%></option>
+</select>
+</div>
+<div class="col-xs-3">
+<button type="button" class="btn btn-danger  btn-rounded waves-effect waves-light" id="action_submit"><%=__('Submit')%></button>
+</div>
+</div>
+</th>
+</tr>
+<tr>
+<th class="no-sort row_check">#</th>
+
+<th class="title"> <%=__('Name')%> </th>
+<th class="title"> <%=__('Father Name')%> </th>
+<th class="no-sort"> <%=__('email')%> </th>
+<th class="no-sort status"> <%=__('Mobile No.')%> </th>
+<th class="no-sort status"> <%=__('Class')%> </th> 
+<th class="no-sort status"> <%=__('Section')%> </th>
+<th class="no-sort status"> <%=__('Status')%> </th>                                 
+<th class="no-sort action"> Action </th>
+</tr>
+</thead>
+
+</table>
+</div>
+</div>
+</div>
+</div>
+</form>
+</div>
+</div>
+</div>
+<!-- /.container-fluid -->
+</div>

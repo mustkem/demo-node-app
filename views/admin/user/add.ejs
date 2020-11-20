@@ -1,0 +1,139 @@
+<div id="page-wrapper">
+<div class="container-fluid">
+<div class="row bg-title">
+<div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+<h4 class="page-title"><%=__('Add Business Plan')%></h4>
+</div>
+<div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+<ol class="breadcrumb">
+<li><a href="/admin/dashboard"><%=__('Dashboard')%></a></li>
+<li class="active">
+<a href="/admin/user"><%=__('Manage Student')%></a>
+</li>
+<li class="active"><%=__('Add')%></li>
+</ol>
+</div>
+<!-- /.col-lg-12 -->
+</div>
+<div class="row">
+<div class="col-md-12">
+<div class="panel panel-info">
+
+<div class="panel-wrapper collapse in" aria-expanded="true">
+<div class="panel-body">
+<form action="" method="post" id="registration-form">
+<div class="form-body">
+<%include ../message/message.ejs%>
+<hr>
+<div class="row">
+<div class="col-md-12">
+<div class="form-group row">
+<label class="control-label col-xs-12 col-md-3 "><%=__('Name')%> *</label>
+<div class="form-group col-xs-12 col-md-9">
+<input type="text" id="name" name="name" data-validation="required" class="form-control" placeholder="<%=__('Name')%>">
+</div>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-md-12">
+<div class="form-group row">
+<label class="control-label col-xs-12 col-md-3 "><%=__('Father Name')%> *</label>
+<div class="form-group col-xs-12 col-md-9">
+<input type="text" id="father_name" name="father_name" data-validation="required" class="form-control" placeholder="<%=__('Fathers Name')%>">
+</div>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-md-12">
+<div class="form-group row">
+<label class="control-label col-xs-12 col-md-3 "><%=__('Email')%> *</label>
+<div class="form-group col-xs-12 col-md-9">
+<input type="text" id="email" name="email" data-validation="email" class="form-control" placeholder="<%=__('Email')%>">
+</div>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-md-12">
+<div class="form-group row">
+<label class="control-label col-xs-12 col-md-3 "><%=__('Mobile No')%> *</label>
+<div class="form-group col-xs-12 col-md-9">
+<input type="text" id="mobile" name="mobile" data-validation="required, number" class="form-control" placeholder="<%=__('Mobile')%>">
+</div>
+</div>
+</div>
+</div> 
+
+<div class="row">
+<div class="col-md-12">
+	<div class="form-group row">
+		<label class="control-label col-xs-12 col-md-3">Select Class</label>
+		 <div class="form-group col-xs-12 col-md-9">
+		<select name="class_id" id="class_id" class="form-control" data-validation="required">
+			<option value="">Select Class</option>
+			<%for(var key=0;key<classes.length;key++){%>
+			   <option value="<%=classes[key].id%>"><%=classes[key].name%></option>
+			<%}%>
+		</select>
+		  </div>
+	</div>
+</div>
+</div>    
+
+<div class="row">
+<div class="col-md-12">
+	<div class="form-group row">
+		<label class="control-label col-xs-12 col-md-3">Select Section</label>
+		 <div class="form-group col-xs-12 col-md-9">
+		<select name="section_id" id="section_id" class="form-control" data-validation="required">
+			<option value="">Select Section</option>
+			</select>
+		  </div>
+	</div>
+</div>
+</div> 
+<!--/row-->
+
+
+<div class="form-actions">
+<button type="submit" class="btn btn-success btn-form-submit"> <i class="fa   fa-check"></i> Save</button>
+<a href="/admin/user" class="btn btn-default"><%=__('Cancel')%> </a>
+</div>
+</form>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+<!-- /.container-fluid -->
+</div>
+
+<script>
+$("#class_id").on("change", function(){
+	var class_id = $(this).val();
+	$.ajax({
+      url: "/admin/class/get_section",
+      data: {
+        class_id : class_id
+      },
+      success: function(data) {
+      console.log(data);
+        var toAppend = '';
+        if (data != '0') {
+          toAppend += '<option value = "">Please Select</option>';
+          for (var i = 0; i < data.length; i++) {
+          
+            toAppend += '<option value= ' + data[i]['_id'] + '>' + data[i]['name'] + '</option>';
+          }
+        } else {
+          toAppend += '<option value = "">Please Select</option>';
+        }
+        $('#section_id').html(toAppend);
+      }
+    });
+});
+</script>

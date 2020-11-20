@@ -1,0 +1,166 @@
+<div id="page-wrapper">
+            <div class="container-fluid">
+                <div class="row bg-title">
+                    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                        <h4 class="page-title">Edit Role</h4>
+                    </div>
+                    <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+                        <ol class="breadcrumb">
+                            <li><a href="/admin/dashboard">Dashboard</a></li>
+                            <li class="active">
+                                <a href="/admin/role">Manage Role</a>
+                            </li>
+                            <li class="active">Edit Role</li>
+                        </ol>
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel panel-info">
+
+                            <div class="panel-wrapper collapse in" aria-expanded="true">
+                                <div class="panel-body">
+                                    <form action="" method="post" id="registration-form">
+                                        <div class="form-body">
+                                          <div class="white-box">
+                                            <h3 class="box-title">Role Info</h3>
+                                            <hr>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group row">
+                                                        <label class="control-label col-xs-12 col-md-3">Role Title</label>
+                                                         <div class="form-group col-xs-12 col-md-9">
+                                                        <input type="text" id="name" name="name" class="form-control" placeholder="Role Title" value="<%=role.role_title%>" data-validation="required,server" data-validation-url="/admin/role/unique_role" data-validation-req-params="<%=JSON.stringify({id:role._id})%>">
+                                                    </div>
+                                                </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group row">
+                                                        <label class="control-label col-xs-12 col-md-3">Role Description</label>
+                                                         <div class="form-group col-xs-12 col-md-9">
+                                                        <textarea name="role_desc" description="" placeholder="Role Description" autocomplete="off" class="form-control " ><%=role.role_desc%></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                               
+                                        </div>
+                                        
+                                        <input type="hidden" name="orderrole_code" value="<%=role.orderrole_code?role.orderrole_code:''%>">
+                                            <!--/row-->
+
+
+                                            <!--/row-->
+
+
+                                            <h3 class="box-title">Permission</h3>
+                                             <table class="table admin-role  table-hover table-nomargin table-bordered">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Menu</th>
+                                                        <th width="12%" style="text-align:center;">Add</th>
+                                                        <th width="12%" style="text-align:center;">Edit</th>
+                                                        <th width="12%" style="text-align:center;">Delete</th>
+                                                    </tr>
+                                                </thead>
+                                            </table>
+                                           
+                                             <%
+                                             var l = 1;
+                                             if(role.type=="superadmin"){
+                                              l = 0;
+                                             }
+                                             %>
+                                            <div class="row">
+                                                <div class="col-md-12 ">
+                                                    <div class="form-group">
+                                                        <div id="accordion">
+                                                  <div class="card">
+                                                    <% var k=1;for(var _index=l; _index < menu.length; _index++) {
+                                                            var _menu = menu[_index];                                                           
+
+                                                          if(_menu.name){
+                                                        %>
+                                                       
+                                                    <div class="card-header" id="headingOne<%=_menu.id%>">
+                                                        <div data-toggle="collapse" data-target="#collapseOne<%=_menu.id%>" aria-expanded="true" aria-controls="collapseOne<%=_menu.id%>">
+                                                          <h5 class="mb-0">
+                                                            <input type="checkbox" onclick="checkAllmenu(this.id)" id="menu_<%=_menu.id%>"  value="<%=_menu.id%>" name="menuCheck[]" class="ab11">
+                                                            &nbsp;&nbsp;<label class="custom-chk" for="menu_<%=_menu.id%>"><b><i class="<%=_menu.class%>"></i> <%=_menu.name%></b></label>
+                                                              </h5>
+                                                        </div>
+                                                    </div>
+                                                    <div id="collapseOne<%=_menu.id%>" class="collapse <%if(k ==1){%>show<%}%>" aria-labelledby="headingOne<%=_menu.id%>" data-parent="#accordion">
+                                                      <div class="card-body">
+                                                        <table class="table table-striped">
+                                                          
+                                                          <tbody>
+                                                          <%
+                                                            if(_menu.submenu && _menu.submenu.length){
+                                                                    for(var _index_sub=0; _index_sub < _menu.submenu.length; _index_sub++) {
+                                                                        var _submenu = _menu.submenu[_index_sub];
+                                                                 %>
+
+                                                                  <tr>
+                                                                    <td>&nbsp;&nbsp;<input type="checkbox" class="menu_<%=_menu.id%> ab11" onclick="checkAllsubmenu(this.id)"  id="submenu_<%=_submenu.id%>_<%=_menu.id%>"  value="<%=_submenu.id%>" name="menuCheck[<%=_menu.id%>][]">
+                                                                    &nbsp;&nbsp;<label class="custom-chk cld" for="submenu_<%=_submenu.id%>_<%=_menu.id%>"> <%=_submenu.name%></label><br>
+                                                                    <td align="center">
+                                                                        <input type="checkbox"  id="submenu_<%=_submenu.id%>_<%=_menu.id%>_add" class="menu_<%=_menu.id%> submenu_<%=_submenu.id%> ab11"  value="1" <%if(_submenu.add =="1"){%>checked="checked"<%}%> name="menuCheck_<%=_submenu.id%>_add" onclick="checksubmenuPermission(this.id)" >
+                                                                         <label class="custom-chk" for="submenu_<%=_submenu.id%>_<%=_menu.id%>_add"></label>
+                                                                    </td>
+                                                                    <td align="center">
+                                                                        <input type="checkbox"  id="submenu_<%=_submenu.id%>_<%=_menu.id%>_edit" class="menu_<%=_menu.id%> submenu_<%=_submenu.id%> ab11"  value="1" <%if(_submenu.edit =="1"){%>checked="checked"<%}%> name="menuCheck_<%=_submenu.id%>_edit" onclick="checksubmenuPermission(this.id)" >
+                                                                         <label class="custom-chk" for="submenu_<%=_submenu.id%>_<%=_menu.id%>_edit"></label>
+                                                                    </td>
+                                                                    <td align="center">
+                                                                    <%if(_submenu.slug == "attribute" || _submenu.slug =="attributeset" ){%>
+                                                                      --
+                                                                    <%}else{%>
+                                                                    <input type="checkbox" value="1" id="submenu_<%=_submenu.id%>_<%=_menu.id%>_del" name="menuCheck_<%=_submenu.id%>_delete" class="menu_<%=_menu.id%> submenu_<%=_submenu.id%> ab11" <%if(_submenu.delete =="1"){%>checked="checked"<%}%>  onclick="checksubmenuPermission(this.id)" >
+                                                                        <label class="custom-chk" for="submenu_<%=_submenu.id%>_<%=_menu.id%>_del"></label>
+                                                                    <%}%>
+                                                                    </td>
+                                                                </tr>
+                                                                <script>
+                                                                    $(document).ready(function(){
+                                                                    checksubmenuPermission("submenu_<%=_submenu.id%>_<%=_menu.id%>_del");
+                                                                    })
+                                                                    </script>
+                                                            <%}}%>
+  
+                                                        </tbody>
+                                                        </table>
+                                                      </div>
+                                                    </div>
+
+                                                     <%
+                                                                k++;
+                                                                 }
+                                                                }
+                                                            
+                                                        %>
+                                                  </div>
+                                                </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="form-actions">
+                                            <button type="submit" class="btn btn-success btn-form-submit"> <i class="fa fa-check"></i> Save</button>
+                                            
+                                              <a href="/admin/role">  <button type="button" class="btn btn-default">Cancel</button></a>
+                                            
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- /.container-fluid -->
+         </div>

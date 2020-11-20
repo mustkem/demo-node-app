@@ -1,0 +1,146 @@
+<div id="page-wrapper">
+            <div class="container-fluid">
+                <div class="row bg-title">
+                    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                        <h4 class="page-title">Add Role</h4>
+                    </div>
+                    <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+                        <ol class="breadcrumb">
+                            <li><a href="dashboard">Dashboard</a></li>
+                            <li class="active">
+                                <a href="/admin/role">Manage Role</a>
+                            </li>
+                            <li class="active">Add</li>
+                        </ol>
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+              <form action="" method="post" id="registration-form">
+                <div class=" white-box">
+                  <h3 class="box-title">Role Information</h3>
+                  <hr>
+                  <div class="row">
+                      <div class="col-md-12">
+                          <div class="form-group row">
+                              <label class="control-label col-xs-12 col-md-3">Role Name</label>
+                             <div class="form-group col-xs-12 col-md-9">
+                              <input type="text" id="name" name="name" class="form-control" placeholder="Role Title" data-validation="required,server" data-validation-url="/admin/role/unique_role">
+                             </div>
+                          </div>
+                      </div>
+                  </div>
+
+                  <div class="row">
+                      <div class="col-md-12">
+                          <div class="form-group row">
+                              <label class="control-label col-xs-12 col-md-3">Role Description</label>
+                             <div class="form-group col-xs-12 col-md-9">
+                              <textarea  name="role_desc" class="form-control" id="role_desc"></textarea>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="row" style="display:none">
+                    <div class="col-md-12">
+                        <div class="form-group row">
+                            <label class="control-label col-xs-12 col-md-3">Select Order Status</label>
+                             <div class="form-group col-xs-12 col-md-9">
+                            <select name="orderrole_code" id="orderrole_code" class="form-control">
+                                <option value="">Select Order Status</option>
+                               
+                                   
+                               
+                            </select>
+                              </div>
+                        </div>
+                    </div>
+                </div>
+                  <!--/row-->
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel panel-info">
+                            <div class="panel-wrapper collapse in" aria-expanded="true">
+                                <div class="white-box">
+                                            <h3 class="box-title">Permission</h3>
+                                            <hr>
+                                      <table class="table mb-0 table-hover table-nomargin table-bordered">
+                                                        <thead>
+                                                            <tr>
+                                                                <th align="center" class="th-hd" width="58%">Menu</th>
+                                                                <th width="14%" class="th-hd" align="center" class="hidden-350" style="text-align:center;">Add</th>
+                                                                <th width="14%" align="center"  class=" th-hd hidden-1024" style="text-align:center;">Edit</th>
+                                                                <th width="14%" align="center" class="hidden-480 th-hd" style="text-align:center;">Delete</th>
+                                                            </tr>
+                                                </table>
+
+                                                <div id="accordion">
+                                                  <div class="card">
+                                                    <% var k=1;for(var _index=1; _index < menu.length; _index++) {
+                                                            var _menu = menu[_index];
+                                                            //if(_menu.slug!="system"){
+
+                                                          if(_menu.name){
+                                                        %>
+                                                    <div class="card-header" id="headingOne<%=_menu.id%>">
+                                                        <div data-toggle="collapse" data-target="#collapseOne<%=_menu.id%>" aria-expanded="true" aria-controls="collapseOne<%=_menu.id%>">
+                                                          <h5 class="mb-0">
+                                                            <input type="checkbox" onclick="checkAllmenu(this.id)" id="menu_<%=_menu.id%>"  value="<%=_menu.id%>" name="menuCheck[]" class="ab11">
+                                                            &nbsp;&nbsp;<label class="custom-chk" for="menu_<%=_menu.id%>"><b><i class="<%=_menu.class%>"></i> <%=_menu.name%></b></label>
+                                                              </h5>
+                                                        </div>
+                                                    </div>
+                                                    <div id="collapseOne<%=_menu.id%>" class="collapse <%if(k ==1){%>show<%}%>" aria-labelledby="headingOne<%=_menu.id%>" data-parent="#accordion">
+                                                      <div class="card-body">
+                                                        <table class="table table-striped">
+                                                          <%
+                                                          if(_menu.submenu && _menu.submenu.length){
+                                                            for(var _index_sub=0; _index_sub < _menu.submenu.length; _index_sub++) {
+                                                                var _submenu = _menu.submenu[_index_sub];
+                                                          %>
+                                                          <tr>
+                                                            <td>&nbsp;&nbsp;<input type="checkbox" class="menu_<%=_menu.id%> ab11" onclick="checkAllsubmenu(this.id)"  id="submenu_<%=_submenu.id%>_<%=_menu.id%>"  value="<%=_submenu.id%>" name="menuCheck[<%=_menu.id%>][]">
+                                                            &nbsp;&nbsp;<label class="custom-chk cld" for="submenu_<%=_submenu.id%>_<%=_menu.id%>" > <%=_submenu.name%></label><br>
+                                                                </td>
+                                                            <td align="center">
+
+                                                                <input type="checkbox"  id="submenu_<%=_submenu.id%>_<%=_menu.id%>_add" class="menu_<%=_menu.id%> submenu_<%=_submenu.id%> ab11"  value="1" name="menuCheck_<%=_submenu.id%>_add" onclick="checksubmenuPermission(this.id)" >
+                                                                <label class="custom-chk" for="submenu_<%=_submenu.id%>_<%=_menu.id%>_add"></label>
+
+                                                            </td>
+                                                            <td align="center">
+                                                                <input type="checkbox"  id="submenu_<%=_submenu.id%>_<%=_menu.id%>_edit" class="menu_<%=_menu.id%> submenu_<%=_submenu.id%> ab11"  value="1" name="menuCheck_<%=_submenu.id%>_edit" onclick="checksubmenuPermission(this.id)" >
+                                                                <label class="custom-chk" for="submenu_<%=_submenu.id%>_<%=_menu.id%>_edit"></label>
+
+                                                            </td>
+                                                            <td align="center"><input type="checkbox" value="1" id="submenu_<%=_submenu.id%>_<%=_menu.id%>_del" name="menuCheck_<%=_submenu.id%>_delete" class="menu_<%=_menu.id%> submenu_<%=_submenu.id%> ab11" onclick="checksubmenuPermission(this.id)">
+                                                                <label class="custom-chk" for="submenu_<%=_submenu.id%>_<%=_menu.id%>_del"></label>
+                                                            </td></tr>
+                                                          <%}}%>
+                                                        </table>
+                                                      </div>
+                                                    </div>
+
+                                                    <%k++;}
+                                                    //}
+                                                    }%>
+                                                  </div>
+                                                </div>
+                                            </div>
+                                           
+                                        </div>
+                                        <div class="panel-body">
+                                        <div class="form-actions">
+                                            <button type="submit" class="btn btn-success btn-form-submit"> <i class="fa fa-check"></i> Save</button>
+                                            <a href="/admin/role"><button type="button" class="btn btn-default">Cancel</button></a>
+                                        </div>
+                                    </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.container-fluid -->
+         </div>

@@ -1,0 +1,130 @@
+<div id="page-wrapper">
+            <div class="container-fluid">
+                <div class="row bg-title">
+                    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                        <h4 class="page-title"><%=__('Add Page')%></h4>
+                    </div>
+                    <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+                        <ol class="breadcrumb">
+                            <li><a href="/admin/dashboard"><%=__('Dashboard')%></a></li>
+                            <li class="active">
+                                <a href="/admin/managepage"><%=__('Manage Page')%></a>
+                            </li>
+                            <li class="active"><%=__('Add')%></li>
+                        </ol>
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel panel-info">
+
+                            <div class="panel-wrapper collapse in" aria-expanded="true">
+                                <div class="panel-body">
+                                    <form action="" method="post" id="registration-form" enctype="multipart/form-data">
+                                        <div class="form-body">
+                                           <!--  <h3 class="box-title">Manage Page</h3> -->
+                                            <hr>
+                                              <div class="col-md-12">
+                                                    <div class="form-group row">
+                                                        <label class="control-label col-xs-12 col-md-3"><%=__('Content Heading')%></label>
+                                                        <div class="form-group col-xs-12 col-md-9">
+                                                        <input class="form-control form-control-solid placeholder-no-fix" type="text" autocomplete="off" placeholder="<%=__('Content Heading')%>" name="content" data-validation="required">
+                                                          </div>
+                                                </div>
+                                    </div>
+                                            <!-- from row -->
+                                               <!-- from row -->
+                                                <div class="col-md-12">
+                                                    <div class="form-group row">
+                                                        <label class="control-label col-xs-12 col-md-3"><%=__('Description')%></label>
+                                                        <div class="form-group col-xs-12 col-md-9">
+                                                        <textarea class="form-control form-control-solid placeholder-no-fix ckeditor"  autocomplete="off" placeholder="<%=__('Description')%>" id="short_desc" name="short_desc"></textarea>
+                                                        
+                                                          </div>
+                                                    </div>
+                                                </div>
+                                            <!-- from row -->
+
+                                                <div class="col-md-12">
+                                                    <div class="form-group row">
+                                                        <label class="control-label col-xs-12 col-md-3"><%=__('Page Title')%></label>
+                                                        <div class="form-group col-xs-12 col-md-9">
+                                                        <textarea class="form-control form-control-solid placeholder-no-fix"  autocomplete="off" placeholder="<%=__('Page Title')%>" name="page_title"></textarea>
+                                                    </div>
+                                                </div>
+                                    </div>
+
+                                                <div class="col-md-12">
+                                                    <div class="form-group row">
+                                                    <label class="control-label col-xs-12 col-md-3"><%=__('Image')%></label>
+                                                    <div class="custom-file col-xs-12 col-md-9">
+                                                    <input type="file" autocomplete="off" class="custom-file-input form-control"  name="file" data-validation-allowing="jpg, png" id="inputFile">
+                                                    <span class="custom-file-control"> </span>
+                                                    </div>
+                                                      </div>
+                                                      <div class="push-md-3 col-md-3">
+                                                          <img id="output"  style="display:none"/>
+                                                      </div>
+                                                </div>
+                                                 <!-- from row -->
+
+
+ <!-- from row -->
+                                                <div class="col-md-12">
+                                                    <div class="form-group row">
+                                                        <label class="control-label col-xs-12 col-md-3"><%=__('Meta Keywords')%></label>
+                                                        <div class="form-group col-xs-12 col-md-9">
+                                                      <textarea class="form-control form-control-solid placeholder-no-fix"  autocomplete="off" placeholder="<%=__('Meta Key')%>" name="meta_key"></textarea>
+                                                          </div>
+                                                </div>
+                                    </div>
+                                                 <!-- from row -->
+
+                                                  <!-- from row -->
+                                                <div class="col-md-12">
+                                                    <div class="form-group row">
+                                                        <label class="control-label col-xs-12 col-md-3"><%=__('Meta Description')%></label>
+                                                         <div class="form-group col-xs-12 col-md-9">
+                                                        <textarea class="form-control form-control-solid placeholder-no-fix"  autocomplete="off" placeholder="<%=__('Meta Description')%>" name="meta_desc"></textarea>
+                                                    </div>
+                                                </div>
+                                    </div> <!--/row-->
+
+                                            <hr>
+
+
+                                        <div class="form-actions">
+                                           <button type="submit" class="btn btn-success btn-form-submit"> <i class="fa   fa-check"></i> Save</button>
+                                            <a href="/admin/managepage" class="btn btn-default">Cancel</a>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- /.container-fluid -->
+         </div>
+
+         <script type="text/javascript">
+             
+            function readURL(input) {
+            if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+            $('#output').css("display","block");
+            $('#output').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+            }
+            }
+
+            $("#inputFile").change(function () {
+            readURL(this);
+            });
+
+         </script>

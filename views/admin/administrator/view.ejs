@@ -1,0 +1,146 @@
+<div id="page-wrapper">
+            <div class="container-fluid">
+                <div class="bg-title">
+                  <div class="col-12">
+                <div class="row">
+                <div class="col-7">
+                            <h3 class="box-title">Manage Administrator</h3>
+                            <ol class="breadcrumb text-left">
+                                <li><a href="/admin/dashboard"><%=__('Dashboard')%></a></li>
+                                <li class="active"><%=__('Manage Administrator')%></li>
+                            </ol>
+                         </div>
+                         <% if(permission.add =='1'){%>
+                <div class="col-5">
+                            <a href="/admin/administrator/add" class="btn btn-danger pull-right m-l-20 btn-rounded  waves-effect waves-light"><%=__('Add New')%></a>
+                           <!-- <a href="#" target="_blank" class="btn pull-right btn-default btn-rounded m-l-20 btn-rounded  waves-effect waves-light">Back</a>-->
+                         </div>
+                        <%}%></div>
+                  </div>
+
+
+                    <!-- /.col-lg-12 -->
+                </div>
+
+
+                <section class="searchfilter">
+
+                  <div class="searchhead clearfix">
+                    <h4> <%=__('Search')%>...</h4>
+                    <i class="srch-icn ti-search" id="global_search"> </i>
+                    </div>
+                                <div>                              
+                                 <div class="searchbox" style="display:<%if(ADMININPUT.search){%>block<%}else{%>none<%}%>">
+                                    <form action="" method="post">
+                                      <div class="row" style="margin-bottom:20px;">
+                                        <div class="col-md-4 col-xs-12">
+                                          <label><%=__('Name')%></label>
+                                          <input class="form-control form-control-solid" type="text" name="pname" id="pname" value="<%=ADMININPUT.name?ADMININPUT.name:''%>">
+                                        </div>
+                                        <div class="col-md-4 col-xs-12">
+                                          <label><%=__('Email')%></label>
+                                          <input class="form-control form-control-solid" type="text" name="pemail" id="pemail"  value="<%=ADMININPUT.email?ADMININPUT.email:''%>">
+                                        </div>
+                                        <div class="col-md-4 col-xs-12">
+                                          <label><%=__('User name')%></label>
+                                          <input class="form-control form-control-solid" type="text" name="user_name" id="user_name"  value="<%=ADMININPUT.username?ADMININPUT.username:''%>">
+                                        </div>
+
+
+                                      </div>
+                                      <div class="row">
+                                        <div class="col-md-4 col-xs-12">
+                                          <label><%=__('Role')%></label>
+                                          <select   class="form-control form-control-solid" name="prole" id="prole">
+                                              <option value=""><%=__('Please select')%></option>
+                                              <%for(var r=0;r<all_role.length; r++){
+                                              var rid = ADMININPUT.role?ADMININPUT.role:''
+                                              %>
+                                              <%=rid +"=="+ all_role[r]._id%>
+                                              <option value="<%=all_role[r]._id%>" <%if(rid == all_role[r]._id){%>selected="selected"<%}%>><%=all_role[r].role_title%></option>
+                                              <%}%>
+
+                                          </select>
+                                        </div>
+                                        <div class="col-md-4 col-xs-12">
+                                          <label>Status</label>
+                                          <select   class="form-control form-control-solid" name="pstatus" id="pstatus">
+                                            <%var st = ADMININPUT.status?ADMININPUT.status:''%>
+                                              <option value=""><%=__('Please select')%></option>
+                                              <option value="1" <%if(st=='1'){%>selected="selected"<%}%>><%=__('Active')%></option>
+                                              <option value="0" <%if(st=='0'){%>selected="selected"<%}%>><%=__('Inactive')%></option>
+                                          </select>
+                                        </div>
+                                     
+
+                                      </div>
+                                      <div class="row srch-btn-wrp">
+                                        <div class="col-md-12">
+                                          <div class="field_cover">
+                                            <input class="btn-search srch-btn"   name="btn_submit" value="Search" type="submit">
+                                            <a href="/admin/administrator">
+                                              <input class="btn_clearsearch srch-btn" value="Clear Search" type="button">
+                                            </a>
+                                          </div>
+                                        </div>
+
+                                      </div>
+                                    </form>
+                                 </div>
+                </section>
+            <form action="" method="post" id="tbl_form">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="white-box">
+                            <div class="table-responsive">
+                            <%include ../message/message.ejs%>
+                                <input type="hidden" name="cont" id="cont" value="administrator">
+                                <input type="hidden" name="fun" id="fun" value="all_administrator">
+                                <table id="administrator_tbl" class="table table-striped">
+                                    <thead>
+                                        <tr style="background:#f9f9f9">
+                                                <th class="no-sort"><input type="checkbox" name="allcheck" value="1" id="all_check"></th>
+                                                <th colspan="2"></th>
+
+                                                <th colspan="5">
+                                                     <div style="float: right" class="pull-right m-t-5">
+                                                         <button type="button" class="btn btn-danger  btn-rounded waves-effect waves-light" id="action_submit"><%=__('Submit')%></button>
+                                                    </div>
+                                                    <div style="width:300px;" class="row pull-right">
+                                                    <label style="line-height:33px" class="col-3 col-form-label" for="select11"> Actions </label>
+                                                        <div class="col-9">
+                                                            <select name="action_change" id="action_change" tabindex="1" data-placeholder="Choose a Category" class="form-control">
+                                                                <option value="">Select option</option>
+                                                                <option value="2"><%=__('Delete')%></option>
+                                                                <option value="1"><%=__('Active')%></option>
+                                                                <option value="0"><%=__('Inactive')%></option>
+                                                                <!--<option value="3"><%=__('Blocked')%></option>
+                                                                <option value="4"><%=__('Unblocked')%></option>-->
+                                                             </select>
+                                                     </div>
+                                                    </div>
+                                                </th>
+                                            </tr>
+                                        <tr>
+                                            <th class="no-sort row_check">#</th>
+                                            <th class="name no-sort"> <%=__('Name')%> </th>
+                                            <th class="email no-sort"> <%=__('Email')%></th>
+                                            <th class="uname no-sort"> <%=__('User Name')%> </th>
+                                            <th class="role no-sort" ><%=__('Role')%>  </th>
+                                            <th class="no-sort status">  <%=__('Status')%>  </th>
+                                            
+                                            <th class="no-sort action" style="min-width: 80px;"> <%=__('Actions')%> </th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+              </form>
+            </div>
+            </div>
+            </div>
+            <!-- /.container-fluid -->
+        </div>

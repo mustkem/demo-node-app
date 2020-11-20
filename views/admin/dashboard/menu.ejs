@@ -1,0 +1,82 @@
+
+<ul class="nav" id="side-menu">
+          
+                    <li class="sidebar-search hidden-sm hidden-md hidden-lg">
+                        <!-- input-group -->
+                        <div class="input-group custom-search-form">
+                            <input type="text" class="form-control" placeholder="Search..."> 
+                            <span class="input-group-btn">
+                              <button class="btn btn-default" type="button"> <i class="fa fa-search"></i> </button>
+                             </span> 
+                          </div>
+                        <!-- /input-group -->
+                    </li>
+
+                   <!-- <li>
+                            <a class="waves-effect" href="/admin/dashboard"><i data-icon="v" class="fa fa-clock-o"></i>  Dashboard </a>
+                    </li>-->
+                    <%var menu_status = false%>
+                      <% 
+                      
+                      for(var _index=0; _index < allmenu.length; _index++) {
+                          var _menu = allmenu[_index];
+                        if(_menu.name /*&& _menu.show==1*/){
+                      %>
+                    <li>
+                        <a href="javascript:void(0)" class="waves-effect">
+                        <i class="<%=_menu.class%> fa-fw" data-icon="v"></i>
+                         <span class="hide-menu"> <%=_menu.name%> <span class="fa arrow"></span>
+                         <span class="label label-rouded label-custom pull-right" id="<%=_menu.id%>"><%=_menu.submenu.length%></span></span>
+                        </a>
+                        <ul class="nav nav-second-level" style="display:none">
+                             <%
+                             var it=0;
+                            if(_menu.submenu && _menu.submenu.length){
+                            for(var _index_sub=0; _index_sub < _menu.submenu.length; _index_sub++) {
+                                var _submenu = _menu.submenu[_index_sub];
+                                var subid = _submenu.id.toString();
+
+                               if(roleid.indexOf(subid)>-1){
+                                menu_status =true
+                                  it++;
+                            %>
+                                <li>
+                                     <a href="/admin/<%=_submenu.slug%>"> <%=_submenu.name%></a>
+                                </li>
+                                <script>
+
+                                $("#<%=_menu.id%>").html(<%=parseInt(it)%>);
+                                </script>
+                            <%
+                                         }
+                                    }
+                                }
+                            %>
+                        </ul>
+                    </li>
+                <%
+                        }
+                    }
+
+                %>
+                </ul>
+
+
+
+    <script type='text/javascript'>
+    var menu_length =<%=menu_status%>
+     $(document).ready(function(){
+      $("li.nav-second-level").collapse("hide");
+
+    $(".waves-effect").click(function(){
+    $(this).parent().siblings().find(".nav-second-level").slideUp();
+			//alert("The paragraph was clicked.");
+			$(this).next(".nav-second-level").slideToggle();
+	});
+   if(menu_length !=true)
+   {
+    $(".container-fluid").html('<div class="bg-title"><div class="col-lg-3 col-md-4 col-sm-4 col-xs-12"><h4 class="page-title">Alert</h4></div></div><div class="row"><div class="col-lg-12 col-md-6 col-sm-6 col-xs-12">Your account is in Inactive status, Please contact to admin.</div></div></div>');
+   }
+    
+	});
+   </script>

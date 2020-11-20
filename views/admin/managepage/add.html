@@ -1,0 +1,171 @@
+<div id="page-wrapper">
+	<div class="container-fluid">
+		<div class="row bg-title">
+
+			<div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+				<h4 class="page-title"><%=__('Add Page')%></h4>
+			</div>
+			<div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+				<ol class="breadcrumb">
+					<li>
+						<a href="<%= sails.config.myconf.ADMINSITEURL%>dashboard"><%=__('Dashboard')%></a>
+					</li>
+					<li class="active">
+						<a href="<%= sails.config.myconf.ADMINSITEURL%>managepage"><%=__('Manage Page')%></a>
+					</li>
+					<li class="active">
+						<%=__('Add')%>
+					</li>
+				</ol>
+			</div>
+			<!-- /.col-lg-12 -->
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="panel panel-info">
+					<div class="panel-wrapper collapse in" aria-expanded="true">
+						<div class="panel-body">
+							<form class="login-form" action="/admin/managepage/add" method="post" enctype="multipart/form-data">
+								<div class="form-body">
+									<!-- from row -->
+									<!--/row-->
+									<!--/tabs -->
+									<div class="col-md-12">
+										<h3 class="box-title"><span class="cms-hd-color"><%=__('Page Info')%></span></h3>
+										<hr>
+										<!-- Nav tabs -->
+										<ul class="nav nav-tabs" role="tablist">
+											<%for(var lang=0;lang
+											<lang_data.length;lang++){%>
+												<li role="presentation" class="<%if(lang==0){%>active<%}%> nav-item">
+													<a href="#<%=lang_data[lang].lng_code%>" class="nav-link" aria-controls="<%=lang_data[lang].lng_code%>" role="tab" data-toggle="tab" aria-expanded="<%if(lang==0){%>true<%}else{%>false<%}%>"> <span class="<%if(lang==0){%>visible-xs<%}else{%>hidden-xs<%}%>"> <%if(lang==0){%><i class="ti-home"></i></span><span class="hidden-xs lang-tab-color"> <%} if(lang_data.length > 1){%> <img width="" height="" src="<%=sails.config.myconf.SITEURL%>files/languages/<%=lang_data[lang].lng_flag%>" alt="<%=lang_data[lang].lng_name%>"/> <%}if(lang_data.length == 1){%>
+														Category
+														<%}else{%>
+														<%=lang_data[lang].lng_name%>
+														<%}%> </span></a>
+												</li>
+												<%}%>
+												<li role="presentation" class="nav-item">
+													<a href="#other" class="nav-link" aria-controls="other" role="tab" data-toggle="tab" aria-expanded="false"> <!--<img width="" height="" alt="French" src="http://localhost:1337/files/languages/images.png">--> <span class="hidden-xs"> Other Data </span> </a>
+												</li>
+
+										</ul>
+
+										<!-- Tab panes -->
+										<div class="tab-content">
+											<%for(var lang=0;lang
+											<lang_data.length;lang++){%>
+												<div role="tabpanel" class="tab-pane <%if(lang==0){%>active<%}%>" id="<%=lang_data[lang].lng_code%>">
+
+													<!-- from row -->
+													<div class="col-md-12">
+														<div class="form-group">
+															<label class="control-label"><%=__('Content Heading')%></label>
+															<input class="form-control form-control-solid placeholder-no-fix" type="text" autocomplete="off" placeholder="<%=__('Content Heading')%>" name="content_<%=lang_data[lang].id%>" data-validation="required">
+														</div>
+													</div>
+													<!-- from row -->
+													<!-- from row -->
+													<div class="col-md-12">
+														<div class="form-group">
+															<label class="control-label"><%=__('Short Description')%></label>
+															<textarea class="form-control form-control-solid placeholder-no-fix mymce"  autocomplete="off" placeholder=<%=__('Short Description')%> name="short_desc_<%=lang_data[lang].id%>"></textarea>															 
+                                                        
+
+														</div>
+													</div>
+													<!-- from row -->
+
+													<div class="col-md-12">
+														<div class="form-group">
+															<label class="control-label"><%=__('Page Title')%></label>
+															<textarea class="form-control form-control-solid placeholder-no-fix"  autocomplete="off" placeholder="<%=__('Page Title')%>" name="page_title_<%=lang_data[lang].id%>"></textarea>
+														</div>
+													</div>
+													<!-- from row -->
+
+													<!-- from row -->
+													<div class="col-md-12">
+														<div class="form-group">
+															<label class="control-label"><%=__('Meta Keywords')%></label>
+															<textarea class="form-control form-control-solid placeholder-no-fix"  autocomplete="off" placeholder="<%=__('Meta Key')%>" name="meta_key_<%=lang_data[lang].id%>"></textarea>
+														</div>
+													</div>
+													<!-- from row -->
+
+													<!-- from row -->
+													<div class="col-md-12">
+														<div class="form-group">
+															<label class="control-label"><%=__('Meta Description')%></label>
+															<textarea class="form-control form-control-solid placeholder-no-fix"  autocomplete="off" placeholder="<%=__('Meta Description')%>" name="meta_desc_<%=lang_data[lang].id%>"></textarea>
+														</div>
+													</div>
+													<!-- from row -->
+
+													<div class="clearfix"></div>
+												</div>
+												<!-- Tab panes END -->
+												<%}%>
+
+												<div role="tabpanel" class="tab-pane <%if(lang==0){%>active<%}%>" id="other">
+
+													<div class="row">
+														<div class="col-md-12">
+															<div class="form-group">
+																<label class="control-label"><%=__('URL Key')%> </label>
+																<input class="form-control form-control-solid placeholder-no-fix" type="text" autocomplete="off" placeholder="<%=__('URL Key')%>" name="url_key" id="url_key" data-validation="required" onblur="checkurlkey('urlkey',this.value,'urlkey')">
+															</div>
+														</div>
+														<!--/span has-error if need-->
+
+														<!--/span-->
+													</div>
+													<!-- from row -->
+													<div class="col-md-12">
+														<div class="form-group">
+															<label class="control-label">Is Active</label>
+															<select class="form-control" data-placeholder="Choose a Category" tabindex="1" name="status">
+																<option value="1">Yes</option>
+																<option value="0">No</option>
+
+															</select>
+														</div>
+													</div>
+													<div class="col-md-12">
+														<div class="form-group">
+															<label class="control-label"><%=__('Image')%></label>
+															<input type="file" autocomplete="off"  name="page_image" data-validation="mime size" data-validation-allowing="jpg, png">
+														</div>
+													</div>
+													<div class="clearfix"></div>
+												</div>
+
+												<!-- Tab panes -->
+
+												<!-- Tab panes END -->
+
+										</div>
+									</div>
+									<!--/tabs -->
+
+								</div>
+								<div class="form-actions">
+									<button type="submit" class="btn btn-success btn-form-submit">
+										<i class="fa fa-check"></i><%=__('Save')%>
+									</button>
+									<a href="<%=sails.config.myconf.ADMINSITEURL%>managepage">
+									<button type="button" class="btn btn-default">
+										<%=__('Cancel')%>
+									</button></a>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+	<!-- /.container-fluid -->
+</div>
+

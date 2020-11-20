@@ -1,0 +1,70 @@
+<div id="page-wrapper">
+            <div class="container-fluid">
+                <div class="row bg-title">
+                    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                        <h3 class="box-title flt-left"><%=__('Manage Page')%></h3>
+                        <ol class="breadcrumb text-left">
+                            <li><a href="<%= APPCONSTANT.ADMINSITEURL%>dashboard"><%=__('Dashboard')%></a></li>
+                            <li class="active"><%=__('Manage Page')%></li>
+                        </ol>
+                    </div>
+                    <%if(permission.add==1){%>
+                    <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+                       <a href="<%=APPCONSTANT.ADMINSITEURL%>managepage/add" class="btn btn-danger pull-right m-l-20 btn-rounded  waves-effect waves-light">Add New</a>
+                     </div>
+                  <%}%>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <form action="" method="post" id="tbl_form">
+                <div class="row">
+                     <div class="col-sm-12">
+                        <div class="white-box">
+                            <div class="table-responsive">
+                            <%include ../message/message.ejs%>
+                             <input type="hidden" name="cont" id="cont" value="managepage">
+                                <input type="hidden" name="fun" id="fun" value="all_pages">
+                                <table id="managepage_tbl" class="table table-striped">
+                                    <thead>
+                                        <tr style="background:#f9f9f9">
+                                                <th class="no-sort"><input type="checkbox" name="allcheck" value="1" id="all_check"></th>
+                                                <th colspan="1"></th>
+
+                                                <th colspan="4">
+                                                     <div class="pull-right m-t-5">
+                                                         <button type="button" class="btn btn-danger  btn-rounded waves-effect waves-light" id="action_submit"><%=__('Submit')%></button>
+                                                    </div>
+                                                    <div class="row pull-right">
+                                                    <label class="col-3 col-form-label" for="select11" style="line-height:33px"> Actions </label>
+                                                        <div class="col-9">
+                                                            <select name="action_change" id="action_change" tabindex="1" data-placeholder="Choose a Category" class="form-control">
+                                                                <option value="">Select option</option>
+                                                                <%if(permission.delete=="1"){%> <option value="2"><%=__('Delete')%></option><%}%>
+                                                                <option value="1"><%=__('Active')%></option>
+                                                                <option value="0"><%=__('Inactive')%></option>
+                                                             </select>
+                                                     </div>
+                                                    </div>
+                                                </th>
+                                            </tr>
+                                        <tr>
+                                            <th class="no-sort row_check">#</th>
+                                            <th class="no-sort image"><%=__('Image')%></th>
+                                            <th class="title"><%=__('Title')%></th>
+                                            <th class="no-sort status"><%=__('Status')%></th>
+                                            <th class="no-sort action"><%=__('Actions')%></th>
+                                        </tr>
+                                    </thead>
+
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+                </form>
+            </div>
+            </div>
+            </div>
+            <!-- /.container-fluid -->
+        </div>

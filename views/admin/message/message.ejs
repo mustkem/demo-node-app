@@ -1,0 +1,17 @@
+
+<% 
+if(success_messages && success_messages.length>0){
+if(success_messages[0]){%>
+<div class="alert alert-success alert-dismissable">
+	<button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+	<%=success_messages[0]%>
+</div>
+<%}}
+if(error_messages && error_messages.length>0){
+if(error_messages[0]){
+%>
+<div class="alert alert-danger alert-dismissable">
+	<button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+	<%=error_messages[0]%>
+</div>
+<%}}%>

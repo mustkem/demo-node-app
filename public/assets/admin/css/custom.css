@@ -1,0 +1,107 @@
+/*search popup styling start*/
+.overlay{
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0,0,0,0.5);
+	overflow-y: auto;
+	z-index: 9999;
+}
+.popup{
+	position: fixed;
+	left: 0;
+	right: 0;
+	top: 50%;
+	width: 95%;
+	max-width: 650px;
+	background-color: #fff;
+	padding: 30px 40px;
+	border-radius: 5px;
+	margin: 0 auto;
+	-webkit-transform: translateY(-50%);
+	-moz-transform: translateY(-50%);
+	-ms-transform: translateY(-50%);
+	-o-transform: translateY(-50%);
+	transform: translateY(-50%);
+}
+.search-list, .check-list{
+	margin: 0;
+	padding: 0;
+}
+.search-list{
+	margin-bottom: 20px;
+}
+.search-list li{
+	margin-right: 30px;
+}
+.search-list li.active .btn{
+	color: #292b2c;
+    background-color: #e6e6e6;
+    border-color: #adadad;
+}
+.search-list li.active .dropdown-toggle:after{
+	border-top: none;
+	border-bottom: .3em solid;
+}
+.search-list .btn, .check-list li label, .btn-apply .btn{
+	text-transform: capitalize;
+}
+.check-list li{
+	width: 33.33%;
+	padding-right: 20px;
+	margin-bottom: 15px;
+}
+.check-list li label{
+	display: flex;
+	align-items: center;
+}
+.check-list li input{
+	margin: 0 10px 0 0; 
+} 
+.search-content{
+  	border: 2px solid #000;
+  	padding: 30px 20px;
+  	display: none;
+}
+.search-content.active{
+	display: block;
+}
+.btn-apply{
+	padding-top: 15px;
+}
+/*search popup styling end*/
+/*plan block styling start*/
+.plan-row .btn{
+	text-transform: capitalize;
+}
+.plan-row .btn-secondary{
+	margin-right: 10px;
+}
+.plan-block{
+	text-align: center;
+	margin-bottom: 20px;
+}
+.plan-details{
+	border: 2px solid #000;
+	padding: 20px 15px;	
+	margin: 0 20px;
+}
+.plan-block h4{	
+	font-weight: 600;
+}
+.plan-details p{
+	font-weight: 400;
+	text-align: left;
+	margin-bottom: 20px;
+}
+.plan-details .btn-primary, .plan-details .btn-primary:active:focus {
+    background-color: #0275d8;
+    border-color: #0275d8;
+}
+.plan-details .btn-primary:focus{
+	color: #fff;
+	opacity: 1;
+}
+/*plan block styling end*/
